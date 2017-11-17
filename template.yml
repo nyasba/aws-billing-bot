@@ -1,0 +1,32 @@
+﻿AWSTemplateFormatVersion: 2010-09-09
+Transform:
+- AWS::Serverless-2016-10-31
+- AWS::CodeStar
+Description: AWS利用料を通知するbot
+
+Parameters:
+  ProjectId:
+    Type: String
+    Description: CodeStar projectId used to associate new resources to team members
+
+Resources:
+  billingbot:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: billing_bot.lambda_handler
+      Runtime: python2.7
+      CodeUri: src
+      Description: AWS利用料を通知するbot
+      MemorySize: 128
+      Timeout: 60
+      Role: arn:aws:iam::XXXXX:role/CodeStarWorker-billing-bot-Lambda
+      Events:
+        Schedule1:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 1 * * ? *)
+      Environment:
+        Variables:
+          CHANNEL: XXXXX
+          WEBHOOKURL: 'https://slack.sample/xxxx'
+          ENVIRONMENT: DEV

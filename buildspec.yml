@@ -1,0 +1,13 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - pip install -r requirements.txt -t ./src
+  build:
+    commands:
+      - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template template-export.json
+artifacts:
+  type: zip
+  files:
+    - template-export.json
