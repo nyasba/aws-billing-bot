@@ -19,7 +19,7 @@ Resources:
       Description: AWS利用料を通知するbot
       MemorySize: 128
       Timeout: 60
-      Role: arn:aws:iam::XXXXX:role/CodeStarWorker-billing-bot-Lambda
+      Role: arn:aws:iam::561742202062:role/CodeStarWorker-billing-bot-Lambda
       Events:
         Schedule1:
           Type: Schedule
@@ -29,4 +29,4 @@ Resources:
         Variables:
           CHANNEL: XXXXX
           WEBHOOKURL: 'https://slack.sample/xxxx'
-          ENVIRONMENT: DEV
+          ENVIRONMENT: arch
